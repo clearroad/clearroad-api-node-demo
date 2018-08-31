@@ -4,6 +4,7 @@
   "description": "Demo for ClearRoad API for node",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +24,7 @@
   },
   "homepage": "https://github.com/clearroad/clearroad-api-node-demo#readme",
   "dependencies": {
-    "@clearroad/api": "0.0.1",
+    "@clearroad/api": "^0.1.0",
     "dotenv": "^6.0.0"
   }
 }
