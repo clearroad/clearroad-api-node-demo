@@ -1,6 +1,6 @@
-# ClearRoad API Node Demo
+# ClearRoad API Node Samples
 
-Sample Demo using the ClearRoad API on node
+Samples using the ClearRoad API for node
 
 # Usage
 
