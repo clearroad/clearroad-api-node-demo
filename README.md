@@ -8,8 +8,7 @@ Samples using the ClearRoad API for node
 2. Create a `.env` file containing:
 ```
 CLEARROAD_URL=<url>
-CLEARROAD_LOGIN=<login>
-CLEARROAD_PWD=<password>
+CLEARROAD_ACCESS_TOKEN=<access token>
 CLEARROAD_STORAGE_ACCESS_TOKEN=<access token>
 ```
 

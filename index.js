@@ -7,13 +7,12 @@ const { query } = require('./src/query');
 dotenv.config();
 
 const url = process.env.CLEARROAD_URL;
-const login = process.env.CLEARROAD_LOGIN;
-const pwd = process.env.CLEARROAD_PWD;
+const accessToken = process.env.CLEARROAD_ACCESS_TOKEN;
 const options = {
   type: 'dropbox',
   accessToken: process.env.CLEARROAD_STORAGE_ACCESS_TOKEN
 };
-const cr = new ClearRoad(url, login, pwd, options);
+const cr = new ClearRoad(url, accessToken, options);
 
 const run = async () => {
   await sync(cr);
