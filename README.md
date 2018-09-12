@@ -15,7 +15,7 @@ CLEARROAD_STORAGE_ACCESS_TOKEN=<access token>
 3. Get a [dropbox access token](#dropbox)
 4. Run `$ node index.js`
 
-Alternatively, you can use Google Drive as a storage account: modify `options.type` in `index.js` and set it to `gdrive`. You will need to get an access token as well.
+Alternatively, you can use Google Drive as a storage account: modify `options.localStorage.type` in `index.js` and set it to `gdrive`. You will need to get an access token as well.
 
 ## <a name="dropbox"></a> Using with Dropbox
 
