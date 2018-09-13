@@ -3,7 +3,7 @@ const ClearRoad = require('@clearroad/api/node').ClearRoad;
 
 const { sync } = require('./src/sync');
 const { query } = require('./src/query');
-const { getReport } = require('./src/report');
+const { getReportFromRequest } = require('./src/report');
 
 dotenv.config();
 
@@ -45,7 +45,7 @@ const run = async () => {
       query: 'grouping_reference: "report" AND portal_type:"Road Report Request"',
       select_list: ['source_reference']
     });
-    const report = await getReport(cr, reports.data.rows[0].id);
+    const report = await getReportFromRequest(cr, reports.data.rows[0].value.source_reference);
     console.log(report);
   });
 };
