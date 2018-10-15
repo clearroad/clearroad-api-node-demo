@@ -32,3 +32,38 @@ const options = {
   }
 };
 ```
+
+## <a name="mongodb"></a> Using with MongoDB
+
+1. Save your mongodb connection string in the `.env` file:
+```
+MONGODB_URL=mongodb://<user>:<password>@<host>:<port>
+```
+
+2. Update the storage options in [index.js](index.js#L15):
+```javascript
+const options = {
+  localStorage: {
+    type: 'mongodb',
+    url: process.env.MONGODB_URL,
+    database: 'clearroad-api-node-samples'
+  }
+};
+```
+
+Alternatively, you can pass in your `user` and `password` in the `clientOptions` options:
+```javascript
+const options = {
+  localStorage: {
+    type: 'mongodb',
+    url: 'mongodb://<host>:<port>',
+    clientOptions: {
+      auth: {
+        user: 'user',
+        password: 'password'
+      }
+    },
+    database: 'clearroad-api-node-samples'
+  }
+};
+```

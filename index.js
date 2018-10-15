@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const { ClearRoad, jIO, PortalTypes } = require('@clearroad/api');
+const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
 
 const { sync } = require('./src/sync');
 const { query } = require('./src/query');
@@ -22,6 +23,15 @@ const options = {
 //   localStorage: {
 //     type: 'dropbox',
 //     accessToken: process.env.DROPBOX_ACCESS_TOKEN
+//   }
+// };
+
+// --- MongoDB
+// const options = {
+//   localStorage: {
+//     type: mongodbStorage,
+//     url: process.env.MONGODB_URL,
+//     database: 'crapi-node-samples'
 //   }
 // };
 

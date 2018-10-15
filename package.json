@@ -19,7 +19,7 @@
     "samples",
     "node"
   ],
-  "author": "Guillaume Royer <guillaumeroyer@gmail.com>",
+  "author": "Guillaume Royer <guillaume.royer@clearroad.io>",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/clearroad/clearroad-api-node-samples/issues"
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/clearroad/clearroad-api-node-samples#readme",
   "dependencies": {
     "@clearroad/api": "^2.1.0",
+    "@clearroad/api-storage-mongodb": "0.0.1-rc.20",
     "dotenv": "^6.0.0"
   },
   "devDependencies": {
