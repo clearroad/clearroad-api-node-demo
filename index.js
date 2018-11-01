@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const { ClearRoad, PortalTypes } = require('@clearroad/api');
+const { ClearRoad, jIO, PortalTypes } = require('@clearroad/api');
 
 const { sync } = require('./src/sync');
 const { query } = require('./src/query');
@@ -40,24 +40,37 @@ const runSafe = async (func) => {
 };
 
 const run = async () => {
-  await sync(cr);
+  await runSafe(async () => {
+    await sync(cr);
+  });
 
-  runSafe(async () => {
+  await runSafe(async () => {
     const documents = await query(cr, {
-      query: `portal_type:"${PortalTypes.RoadMessage}"`,
+      query: `portal_type: "${PortalTypes.RoadMessage}"`,
       select_list: ['source_reference']
     });
     console.log(documents.data.rows);
   });
 
-  runSafe(async () => {
+  await runSafe(async () => {
+    const documents = await query(cr, {
+      query: 'portal_type: "Road Account"',
+      select_list: ['reference', 'registrations']
+    });
+    console.log(documents.data.rows);
+  });
+
+  await runSafe(async () => {
     const reports = await query(cr, {
-      query: `grouping_reference:"report" AND portal_type:"${PortalTypes.RoadReportRequest}"`,
+      query: `grouping_reference: "report" AND portal_type: "${PortalTypes.RoadReportRequest}"`,
       select_list: ['source_reference']
     });
+    console.log(reports.data.rows);
     const report = await getReportFromRequest(cr, reports.data.rows[0].value.source_reference);
-    console.log(report);
+    console.log(jIO.util.stringify(report));
   });
+
+  process.exit(0);
 };
 
 run();
