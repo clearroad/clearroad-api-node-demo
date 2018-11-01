@@ -33,6 +33,29 @@ const options = {
 };
 ```
 
+## <a name="mariadb"></a> Using with MariaDB
+
+1. Save your mariadb connection params in the `.env` file:
+```
+MARIADB_HOST=<host>
+MARIADB_USER=<user>
+MARIADB_PASSWORD=<password>
+```
+
+2. Update the storage options in [index.js](index.js#L15):
+```javascript
+const options = {
+  localStorage: {
+    type: 'mariadb',
+    host: process.env.MARIADB_HOST,
+    user: process.env.MARIADB_USER,
+    password: process.env.MARIADB_PASSWORD,
+    database: 'clearroad-api-node-samples'
+  },
+  useQueryStorage: true
+};
+```
+
 ## <a name="mongodb"></a> Using with MongoDB
 
 1. Save your mongodb connection string in the `.env` file:

@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const { ClearRoad, jIO, PortalTypes } = require('@clearroad/api');
+const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
 
 const { sync } = require('./src/sync');
@@ -24,6 +25,18 @@ const options = {
 //     type: 'dropbox',
 //     accessToken: process.env.DROPBOX_ACCESS_TOKEN
 //   }
+// };
+
+// --- MariaDB
+// const options = {
+//   localStorage: {
+//     type: mariadbStorage,
+//     host: process.env.MARIADB_HOST,
+//     user: process.env.MARIADB_USER,
+//     password: process.env.MARIADB_PASSWORD,
+//     database: 'crapi-node-samples'
+//   },
+//   useQueryStorage: true
 // };
 
 // --- MongoDB

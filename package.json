@@ -26,8 +26,9 @@
   },
   "homepage": "https://github.com/clearroad/clearroad-api-node-samples#readme",
   "dependencies": {
-    "@clearroad/api": "^2.1.0",
-    "@clearroad/api-storage-mongodb": "0.0.1-rc.20",
+    "@clearroad/api": "^2.2.0",
+    "@clearroad/api-storage-mariadb": "0.0.1-rc.21",
+    "@clearroad/api-storage-mongodb": "0.0.1-rc.21",
     "dotenv": "^6.0.0"
   },
   "devDependencies": {
