@@ -9,13 +9,12 @@ Samples using the ClearRoad API for node
 ```
 CLEARROAD_URL=<url>
 CLEARROAD_ACCESS_TOKEN=<access token>
-CLEARROAD_STORAGE_ACCESS_TOKEN=<access token>
 ```
 
 3. Get a [dropbox access token](#dropbox)
 4. Run `$ node index.js`
 
-Alternatively, you can use Google Drive as a storage account: modify `options.localStorage.type` in `index.js` and set it to `gdrive`. You will need to get an access token as well.
+Alternatively, you can use Google Drive as a storage account: modify `options.localStorage.type` in [index.js](index.js#L15): and set it to `gdrive`. You will need to get an access token as well.
 
 ## <a name="dropbox"></a> Using with Dropbox
 
@@ -23,4 +22,13 @@ Alternatively, you can use Google Drive as a storage account: modify `options.lo
 2. Choose the "Dropbox API"
 3. Choose "App Folder"
 4. Name your app and click on "Create"
-6. Generate an access token, save the token in your `.env` file as `CLEARROAD_STORAGE_ACCESS_TOKEN`.
+6. Generate an access token, save the token in your `.env` file as `DROPBOX_ACCESS_TOKEN`.
+7. Update the storage options in [index.js](index.js#L15):
+```javascript
+const options = {
+  localStorage: {
+    type: 'dropbox',
+    accessToken: process.env.DROPBOX_ACCESS_TOKEN
+  }
+};
+```

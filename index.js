@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const ClearRoad = require('@clearroad/api/node').ClearRoad;
+const { ClearRoad, PortalTypes } = require('@clearroad/api');
 
 const { sync } = require('./src/sync');
 const { query } = require('./src/query');
@@ -9,13 +9,23 @@ dotenv.config();
 
 const url = process.env.CLEARROAD_URL;
 const accessToken = process.env.CLEARROAD_ACCESS_TOKEN;
-const storageOptions = {
-  type: 'dropbox',
-  accessToken: process.env.CLEARROAD_STORAGE_ACCESS_TOKEN
+
+// --- Memory (disk)
+const options = {
+  localStorage: {
+    type: 'memory'
+  }
 };
-const cr = new ClearRoad(url, accessToken, {
-  localStorage: storageOptions
-});
+
+// --- Dropbox
+// const options = {
+//   localStorage: {
+//     type: 'dropbox',
+//     accessToken: process.env.DROPBOX_ACCESS_TOKEN
+//   }
+// };
+
+const cr = new ClearRoad(url, accessToken, options);
 
 const runSafe = async (func) => {
   try {
@@ -34,7 +44,7 @@ const run = async () => {
 
   runSafe(async () => {
     const documents = await query(cr, {
-      query: 'portal_type:"Road Message"',
+      query: `portal_type:"${PortalTypes.RoadMessage}"`,
       select_list: ['source_reference']
     });
     console.log(documents.data.rows);
@@ -42,7 +52,7 @@ const run = async () => {
 
   runSafe(async () => {
     const reports = await query(cr, {
-      query: 'grouping_reference: "report" AND portal_type:"Road Report Request"',
+      query: `grouping_reference:"report" AND portal_type:"${PortalTypes.RoadReportRequest}"`,
       select_list: ['source_reference']
     });
     const report = await getReportFromRequest(cr, reports.data.rows[0].value.source_reference);
