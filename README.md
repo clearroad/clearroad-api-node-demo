@@ -90,3 +90,27 @@ const options = {
   }
 };
 ```
+
+## <a name="postgresql"></a> Using with PostgreSQL
+
+1. Save your postgresql connection params in the `.env` file:
+```
+PG_HOST=<host>
+PG_USER=<user>
+PG_PASSWORD=<password>
+```
+
+2. Update the storage options in [index.js](index.js#L15):
+```javascript
+const options = {
+  localStorage: {
+    type: 'postgresql',
+    host: process.env.PG_HOST,
+    port: 5432,
+    ssl: true,
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD,
+    database: 'clearroad-api-node-samples'
+  }
+};
+```

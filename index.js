@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const { ClearRoad, jIO, PortalTypes } = require('@clearroad/api');
 const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
+const pgStorage = require('@clearroad/api-storage-postgresql').default;
 
 const { sync } = require('./src/sync');
 const { query } = require('./src/query');
@@ -44,6 +45,19 @@ const options = {
 //   localStorage: {
 //     type: mongodbStorage,
 //     url: process.env.MONGODB_URL,
+//     database: 'crapi-node-samples'
+//   }
+// };
+
+// --- PostgreSQL
+// const options = {
+//   localStorage: {
+//     type: pgStorage,
+//     host: process.env.PG_HOST,
+//     port: 5432,
+//     ssl: true,
+//     user: process.env.PG_USER,
+//     password: process.env.PG_PASSWORD,
 //     database: 'crapi-node-samples'
 //   }
 // };
