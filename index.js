@@ -14,54 +14,53 @@ dotenv.config();
 const url = process.env.CLEARROAD_URL;
 const accessToken = process.env.CLEARROAD_ACCESS_TOKEN;
 
-// --- Memory (disk)
-const options = {
-  localStorage: {
-    type: 'memory'
-  }
-};
+const options = {};
+const storage = process.env.CLEARROAD_STORAGE || 'memory';
 
-// --- Dropbox
-// const options = {
-//   localStorage: {
-//     type: 'dropbox',
-//     accessToken: process.env.DROPBOX_ACCESS_TOKEN
-//   }
-// };
-
-// --- MariaDB
-// const options = {
-//   localStorage: {
-//     type: mariadbStorage,
-//     host: process.env.MARIADB_HOST,
-//     user: process.env.MARIADB_USER,
-//     password: process.env.MARIADB_PASSWORD,
-//     database: 'crapi-node-samples'
-//   },
-//   useQueryStorage: true
-// };
-
-// --- MongoDB
-// const options = {
-//   localStorage: {
-//     type: mongodbStorage,
-//     url: process.env.MONGODB_URL,
-//     database: 'crapi-node-samples'
-//   }
-// };
-
-// --- PostgreSQL
-// const options = {
-//   localStorage: {
-//     type: pgStorage,
-//     host: process.env.PG_HOST,
-//     port: 5432,
-//     ssl: true,
-//     user: process.env.PG_USER,
-//     password: process.env.PG_PASSWORD,
-//     database: 'crapi-node-samples'
-//   }
-// };
+switch (storage) {
+  // --- MariaDB
+  case mariadbStorage:
+    options.localStorage = {
+      type: storage,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      port: process.env.DB_PORT
+    };
+    options.useQueryStorage = true;
+    break;
+  // --- MongoDB
+  case mongodbStorage:
+    options.localStorage = {
+      type: storage,
+      url: process.env.DB_URL,
+      database: process.env.DB_NAME
+    };
+    break;
+  // --- PostgreSQL
+  case pgStorage:
+    options.localStorage = {
+      type: storage,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      port: process.env.DB_PORT,
+      ssl: process.env.DB_USE_SSL === 'true'
+    };
+    break;
+  case 'dropbox':
+    options.localStorage = {
+      type: storage,
+      accessToken: process.env.DROPBOX_ACCESS_TOKEN
+    };
+    break;
+  default:
+    options.localStorage = {
+      type: storage
+    };
+}
 
 const cr = new ClearRoad(url, accessToken, options);
 

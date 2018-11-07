@@ -9,6 +9,7 @@ Samples using the ClearRoad API for node
 ```
 CLEARROAD_URL=<url>
 CLEARROAD_ACCESS_TOKEN=<access token>
+CLEARROAD_STORAGE=memory
 ```
 
 3. Get a [dropbox access token](#dropbox)
@@ -22,95 +23,43 @@ Alternatively, you can use Google Drive as a storage account: modify `options.lo
 2. Choose the "Dropbox API"
 3. Choose "App Folder"
 4. Name your app and click on "Create"
-6. Generate an access token, save the token in your `.env` file as `DROPBOX_ACCESS_TOKEN`.
-7. Update the storage options in [index.js](index.js#L15):
-```javascript
-const options = {
-  localStorage: {
-    type: 'dropbox',
-    accessToken: process.env.DROPBOX_ACCESS_TOKEN
-  }
-};
+6. Generate an access token
+7. Save the token in the `.env` file and set the storage as `dropbox`
+```
+CLEARROAD_STORAGE=dropbox
+DROPBOX_ACCESS_TOKEN=<access token>
 ```
 
 ## <a name="mariadb"></a> Using with MariaDB
 
 1. Save your mariadb connection params in the `.env` file:
 ```
-MARIADB_HOST=<host>
-MARIADB_USER=<user>
-MARIADB_PASSWORD=<password>
-```
-
-2. Update the storage options in [index.js](index.js#L15):
-```javascript
-const options = {
-  localStorage: {
-    type: 'mariadb',
-    host: process.env.MARIADB_HOST,
-    user: process.env.MARIADB_USER,
-    password: process.env.MARIADB_PASSWORD,
-    database: 'clearroad-api-node-samples'
-  },
-  useQueryStorage: true
-};
+CLEARROAD_STORAGE=mariadb
+DB_NAME=clearroad-api-node-samples
+DB_HOST=<host>
+DB_USER=<user>
+DB_PASSWORD=<password>
+DB_PORT=<port>
 ```
 
 ## <a name="mongodb"></a> Using with MongoDB
 
 1. Save your mongodb connection string in the `.env` file:
 ```
-MONGODB_URL=mongodb://<user>:<password>@<host>:<port>
-```
-
-2. Update the storage options in [index.js](index.js#L15):
-```javascript
-const options = {
-  localStorage: {
-    type: 'mongodb',
-    url: process.env.MONGODB_URL,
-    database: 'clearroad-api-node-samples'
-  }
-};
-```
-
-Alternatively, you can pass in your `user` and `password` in the `clientOptions` options:
-```javascript
-const options = {
-  localStorage: {
-    type: 'mongodb',
-    url: 'mongodb://<host>:<port>',
-    clientOptions: {
-      auth: {
-        user: 'user',
-        password: 'password'
-      }
-    },
-    database: 'clearroad-api-node-samples'
-  }
-};
+CLEARROAD_STORAGE=mongodb
+DB_NAME=clearroad-api-node-samples
+DB_URL=mongodb://<user>:<password>@<host>:<port>
 ```
 
 ## <a name="postgresql"></a> Using with PostgreSQL
 
 1. Save your postgresql connection params in the `.env` file:
 ```
-PG_HOST=<host>
-PG_USER=<user>
-PG_PASSWORD=<password>
-```
-
-2. Update the storage options in [index.js](index.js#L15):
-```javascript
-const options = {
-  localStorage: {
-    type: 'postgresql',
-    host: process.env.PG_HOST,
-    port: 5432,
-    ssl: true,
-    user: process.env.PG_USER,
-    password: process.env.PG_PASSWORD,
-    database: 'clearroad-api-node-samples'
-  }
-};
+CLEARROAD_STORAGE=postgresql
+DB_NAME=clearroad-api-node-samples
+DB_HOST=<host>
+DB_USER=<user>
+DB_PASSWORD=<password>
+DB_PORT=<port>
+DB_USE_SSL=true/false
 ```
