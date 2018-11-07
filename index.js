@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
-const { ClearRoad, jIO, PortalTypes } = require('@clearroad/api');
+const { ClearRoad, PortalTypes } = require('@clearroad/api');
+const { jIO } = require('jio');
 const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
 const pgStorage = require('@clearroad/api-storage-postgresql').default;
