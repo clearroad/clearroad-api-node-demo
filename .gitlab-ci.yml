@@ -9,7 +9,7 @@ run:
     name: $CI_COMMIT_REF_NAME
   script:
     - npm install
-    - npm install @clearroad/api@latest
+    - npm install
     - DB_NAME="gl-api-node-$CI_COMMIT_REF_NAME" npm start
   only:
     - master
