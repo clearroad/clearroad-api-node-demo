@@ -1,5 +1,7 @@
 # ClearRoad API Node Samples
 
+[![Build Status](https://gitlab.com/clearroad/api-node-samples/badges/master/pipeline.svg)](https://gitlab.com/clearroad/api-node-samples/commits/master)
+
 Samples using the ClearRoad API for node
 
 # Usage

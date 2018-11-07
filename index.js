@@ -73,6 +73,9 @@ const runSafe = async (func) => {
     if (err.stack) {
       console.error(err.stack);
     }
+    if (process.env.CI) {
+      throw err;
+    }
   }
 };
 

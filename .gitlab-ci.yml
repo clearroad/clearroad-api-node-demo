@@ -1,0 +1,16 @@
+image: node
+
+cache:
+  paths:
+    - node_modules/
+
+run:
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  script:
+    - npm install
+    - npm install @clearroad/api@latest
+    - DB_NAME="gl-api-node-$CI_COMMIT_REF_NAME" npm start
+  only:
+    - master
+    - develop
