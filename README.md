@@ -53,6 +53,18 @@ DB_NAME=clearroad-api-node-samples
 DB_URL=mongodb://<user>:<password>@<host>:<port>
 ```
 
+## <a name="mssql"></a> Using with Microsoft SQL Server
+
+1. Save your sql server connection params in the `.env` file:
+```
+CLEARROAD_STORAGE=mssql
+DB_NAME=clearroad-api-node-samples
+DB_HOST=<host>
+DB_USER=<user>
+DB_PASSWORD=<password>
+DB_USE_SSL=true/false
+```
+
 ## <a name="postgresql"></a> Using with PostgreSQL
 
 1. Save your postgresql connection params in the `.env` file:

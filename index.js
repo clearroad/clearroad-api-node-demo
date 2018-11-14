@@ -3,6 +3,7 @@ const { ClearRoad, PortalTypes } = require('@clearroad/api');
 const { jIO } = require('jio');
 const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
+const sqlStorage = require('@clearroad/api-storage-mssql').default;
 const pgStorage = require('@clearroad/api-storage-postgresql').default;
 
 const { sync } = require('./src/sync');
@@ -37,6 +38,18 @@ switch (storage) {
       url: process.env.DB_URL,
       database: process.env.DB_NAME
     };
+    break;
+  // --- MSSQL
+  case sqlStorage:
+    options.localStorage = {
+      type: storage,
+      server: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      encrypt: process.env.DB_USE_SSL === 'true'
+    };
+    options.useQueryStorage = true;
     break;
   // --- PostgreSQL
   case pgStorage:
