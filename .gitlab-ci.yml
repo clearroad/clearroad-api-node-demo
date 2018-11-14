@@ -4,13 +4,76 @@ cache:
   paths:
     - node_modules/
 
-run:
-  environment:
-    name: $CI_COMMIT_REF_NAME
+variables:
+  DB_NAME: "gl-api-node-$CI_COMMIT_REF_NAME"
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  artifacts:
+    paths:
+      - node_modules/
   script:
     - npm install
+    # issue with installing storages
     - npm install
-    - DB_NAME="gl-api-node-$CI_COMMIT_REF_NAME" npm start
+  only:
+    - master
+    - develop
+
+mariadb:
+  stage: test
+  dependencies:
+    - build
+  variables:
+     DB_HOST: $MARIADB_HOST
+     DB_USER: $MARIADB_USER
+     DB_PASSWORD: $MARIADB_PASSWORD
+  script:
+    - CLEARROAD_STORAGE=mariadb DB_NAME=$DB_NAME DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD npm start
+  only:
+    - master
+    - develop
+
+mongodb:
+  stage: test
+  dependencies:
+    - build
+  variables:
+     URL: $MONGODB_URL
+  script:
+    - CLEARROAD_STORAGE=mongodb DB_NAME=$DB_NAME DB_URL=$URL npm start
+  only:
+    - master
+    - develop
+
+mssql:
+  stage: test
+  dependencies:
+    - build
+  variables:
+     DB_HOST: $MSSQL_HOST
+     DB_USER: $MSSQL_USER
+     DB_PASSWORD: $MSSQL_PASSWORD
+  script:
+    - CLEARROAD_STORAGE=mssql DB_NAME=$DB_NAME DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD DB_USE_SSL=true npm start
+  only:
+    - master
+    - develop
+
+postgresql:
+  stage: test
+  dependencies:
+    - build
+  variables:
+     DB_HOST: $POSTGRESQL_HOST
+     DB_USER: $POSTGRESQL_USER
+     DB_PASSWORD: $POSTGRESQL_PASSWORD
+  script:
+    - CLEARROAD_STORAGE=postgresql DB_NAME=$DB_NAME DB_HOST=$DB_HOST DB_USER=$DB_USER DB_PASSWORD=$DB_PASSWORD DB_PORT=5432 DB_USE_SSL=true npm start
   only:
     - master
     - develop
