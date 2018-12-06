@@ -1,5 +1,8 @@
 const dotenv = require('dotenv');
-const { ClearRoad, PortalTypes } = require('@clearroad/api');
+const {
+  ClearRoad, PortalTypes, GroupingReferences,
+  queryPortalType, queryGroupingReference
+} = require('@clearroad/api');
 const { jIO } = require('jio');
 const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
@@ -100,7 +103,7 @@ const run = async () => {
 
     await runSafe(async () => {
       const documents = await query(cr, {
-        query: `portal_type: "${PortalTypes.RoadMessage}"`,
+        query: `${queryPortalType}: "${PortalTypes.RoadMessage}"`,
         select_list: ['source_reference']
       });
       console.log(documents.data.rows);
@@ -108,7 +111,7 @@ const run = async () => {
 
     await runSafe(async () => {
       const documents = await query(cr, {
-        query: 'portal_type: "Road Account"',
+        query: `${queryPortalType}: "${PortalTypes.RoadAccount}"`,
         select_list: ['reference', 'registrations']
       });
       console.log(documents.data.rows);
@@ -116,7 +119,7 @@ const run = async () => {
 
     await runSafe(async () => {
       const reports = await query(cr, {
-        query: `grouping_reference: "report" AND portal_type: "${PortalTypes.RoadReportRequest}"`,
+        query: `${queryGroupingReference}: "${GroupingReferences.Report}" AND ${queryPortalType}: "${PortalTypes.RoadReportRequest}"`,
         select_list: ['source_reference']
       });
       console.log(reports.data.rows);
