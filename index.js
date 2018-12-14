@@ -78,6 +78,7 @@ switch (storage) {
     };
 }
 
+options.debug = !!process.env.CI;
 const cr = new ClearRoad(url, accessToken, options);
 
 const runSafe = async (func) => {
