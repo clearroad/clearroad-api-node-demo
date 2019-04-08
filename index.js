@@ -3,7 +3,7 @@ const {
   ClearRoad, PortalTypes, GroupingReferences,
   queryPortalType, queryGroupingReference
 } = require('@clearroad/api');
-const { jIO } = require('jio');
+const jIO = require('jio');
 const mariadbStorage = require('@clearroad/api-storage-mariadb').default;
 const mongodbStorage = require('@clearroad/api-storage-mongodb').default;
 const sqlStorage = require('@clearroad/api-storage-mssql').default;
