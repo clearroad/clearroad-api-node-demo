@@ -18,7 +18,13 @@ dotenv.config();
 const url = process.env.CLEARROAD_URL;
 const accessToken = process.env.CLEARROAD_ACCESS_TOKEN;
 
-const options = {};
+const options = {
+  syncPortalTypes: [
+    PortalTypes.RoadAccount,
+    PortalTypes.RoadAccountMessage,
+    PortalTypes.RoadReportRequest
+  ]
+};
 const storage = process.env.CLEARROAD_STORAGE || 'memory';
 
 switch (storage) {
