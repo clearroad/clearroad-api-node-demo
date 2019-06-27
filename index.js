@@ -20,6 +20,7 @@ const accessToken = process.env.CLEARROAD_ACCESS_TOKEN;
 
 const options = {
   syncPortalTypes: [
+    PortalTypes.OdometerReadingMessage,
     PortalTypes.RoadAccount,
     PortalTypes.RoadAccountMessage,
     PortalTypes.RoadReportRequest
